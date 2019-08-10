@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+    <title>Design Adviser</title>
+</head>
+<body>
+    <h2>Please enter your design concept:</h2>
+
+    {% from "_formhelpers.html" import render_field %}
+
+    <form method=post action="/results">
+      <dl>
+        {{ render_field(form.category1) }}
+      </dl>
+      <dl>
+          {{ render_field(form.category2) }}
+        </dl>
+        <dl>
+            {{ render_field(form.category3) }}
+          </dl>
+          <dl>
+              {{ render_field(form.style) }}
+            </dl>
+            <dl>
+                {{ render_field(form.color) }}
+              </dl>
+      <dl>
+        {{ render_field(form.description, cols='30', rows='10') }}
+      </dl>
+      <div>
+        <input type=submit value='Submit' name='submit_btn'>
+      </div>
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Design Adviser</title>
+    <link rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <h3>Your design concept:</h3>
+    {% for val in input_values %}
+        <div>
+            {{ val }} 
+        </div>
+{% endfor %}
+    <div>{{ description }}</div>
+
+    <h3>Design</h3>
+    {% for val in attr %}
+    <div>
+        {{ val }}
+    </div>
+{% endfor %}
+
+<table>
+{% for val in color %}
+<tr>
+<td class="code">{{ val }}</td>
+<td class="color" style="height: 1em; width: 2em"></td>
+</tr>
+{% endfor %}
+</table>
+<input type="button" id="color" value="色を確認" onclick="getValue();">
+
+    <div class='button'>
+      <form action="/">
+        <input type=submit value='Submit another review'>
+      </form>
+    </div>
+
+    <script>
+      function getValue(){
+        try{
+          let codeElms = document.getElementsByClassName("code");
+          let colorElms = document.getElementsByClassName("color");
+          let regex = new RegExp(/#([a-fA-F0-9]{3}|[a-fA-F0-9]{6})/);
+          for (let i=0; i<colorElms.length; i++) {
+            if (regex.test(codeElms[i].textContent)){
+              colorElms[i].style.backgroundColor = codeElms[i].textContent;
+            }else{
+              colorElms[i].style.backgroundColor = 'transparent';
+            }
+          }
+
+        }catch(e){
+          let colorElms = document.getElementsByClassName("color");
+          for (let i=0; i<colorElms.length; i++) {
+              colorElms[i].style.backgroundColor = 'transparent';
+          }
+        }
+      }
+    </script>
+
+  </body>
+</html>
